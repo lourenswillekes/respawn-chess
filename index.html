@@ -35,17 +35,17 @@
     }
 
     function onDrop (source, target) {
-      // see if the move is legal
-      var move = game.move({
-        from: source,
-        to: target,
-        promotion: 'q' // NOTE: always promote to a queen for example simplicity
-      })
-
-      var moveCapture = move.flags
-
-      // illegal move
-      if (move === null) return 'snapback'
+      try {
+        var move = game.move({
+          from: source,
+          to: target,
+          promotion: 'q' // NOTE: always promote to a queen for example simplicity
+        })
+      }
+      catch(err) {
+        console.log(err)
+        return 'snapback'
+      }
 
       updateStatus()
     }
